@@ -3,13 +3,14 @@
 
 
 //DOM VALUES
-
+let renderDiv = document.querySelector('.results');
 let breedInput = document.getElementById('pet-search');
 //VALUES
 
 
 let yieldedAdresses = [];
 let refinedAddresses = [];
+let addressGeoCode = [];
 //Breed Suggestions
 let allBreedsArray = [];
 new Awesomplete(breedInput, {
@@ -19,9 +20,6 @@ new Awesomplete(breedInput, {
 
 //FUNCTIONS//
 
-new Awesomplete(breedInput, {
-  list: allBreedsArray
-})
 
 function getAddresses(data) {
   let address = data.petfinder.pets.pet
@@ -33,8 +31,11 @@ function getAddresses(data) {
       "zip": pet.contact.zip
     })
   })
+}
+
+function refineAddresses() {
   yieldedAdresses.map(result => {
-    if (result.address.$t == 'undefined') {
+    if (result.address.$t == null) {
       refinedAddresses.push({
         city: result.city.$t,
         state: result.state.$t,
@@ -48,8 +49,6 @@ function getAddresses(data) {
         zip: result.zip.$t
       })
     }
-
-
   })
 }
 
@@ -66,9 +65,36 @@ function getAllBreeds() {
 }
 
 function geoCodeAddress() {
-  geocoder.geocode({
-
+  $.ajax({
+    url: `https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAR6_jdyKWQCb3VYusDt95oE39dDgDIpdA&address=${refinedAddresses[0].address} ${refinedAddresses[0].city} ${refinedAddresses[0].state} ${refinedAddresses[0].zip}`,
+    type: 'GET',
+    dataType: 'json'
+  }).done(function (geoCode) {
+    console.log(geoCode);
   })
+}
+
+function renderPets(data) {
+  let pets = data.petfinder.pets.pet;
+  let renderDivHtml = ``;
+  for (let i = 0; i < yieldedAdresses.length; i++) {
+    if (pets[i].media.length >= 1) {
+      renderDivHtml += `
+      <img src=${pets[i].media.photos.photo[2].$t}
+      <ul>
+      <li>Age: ${pets[i].age.$t}</li>
+      <li>Description ${pets[i].description.$t}</li>
+      </ul>`
+    } else {
+      renderDivHtml +=
+        `<ul>
+      <li>Age: ${pets[i].age.$t}</li>
+      <li>Description ${pets[i].description.$t}</li>
+      </ul>`
+    }
+
+  }
+  renderDiv.innerHTML = renderDivHtml;
 }
 
 $(function () {
@@ -83,7 +109,6 @@ $(function () {
     let breedName = $('#pet-search').val();
     let postalCode = $('#postal').val();
     event.preventDefault();
-    console.log(breedName, postalCode)
     $('#pet-search').val('');
     $('#postal').val('');
     sendPetFinderRequest(breedName, postalCode);
@@ -97,38 +122,19 @@ $(function () {
           animal: `dog`,
           breed: breed,
           location: postalCode,
-          format: `json`
+          format: `json`,
+          count: 5
         },
         type: "GET",
         dataType: "json"
       })
-
       .done(function (data) {
+        console.log(data)
         getAddresses(data);
+        refineAddresses();
+        renderPets(data);
+        //geoCodeAddress();
       })
   }
 
 })
-
-
-
-
-//DISPLAYING A PET
-
-// let firstPet = response.petfinder.pets.pet[0];
-// if (firstPet.media.length >= 1) {
-//   $('.results').html(`
-//   <img src=${firstPet.media.photos.photo[2].$t}
-//   <ul>
-//   <li>Age: ${firstPet.age.$t}</li>
-//   <li>Sex: ${firstPet.sex.$t}</li>
-//   <li>Description ${firstPet.description.$t}</li>
-//   </ul>`)
-// } else {
-//   $('.results').html(`
-//   <ul>
-//   <li>Age: ${firstPet.age.$t}</li>
-//   <li>Sex: ${firstPet.sex.$t}</li>
-//   <li>Description ${firstPet.description.$t}</li>
-//   </ul>`)
-// }
