@@ -65,37 +65,43 @@ function getAllBreeds() {
 }
 
 function geoCodeAddress() {
-  $.ajax({
-    url: `https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAR6_jdyKWQCb3VYusDt95oE39dDgDIpdA&address=${refinedAddresses[0].address} ${refinedAddresses[0].city} ${refinedAddresses[0].state} ${refinedAddresses[0].zip}`,
-    type: 'GET',
-    dataType: 'json'
-  }).done(function (geoCode) {
-    console.log(geoCode);
-  })
+  for (let i = 0; i < yieldedAdresses.length; i++) {
+    if (refinedAddresses[i].address === undefined) {
+      $.ajax({
+        url: `https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAR6_jdyKWQCb3VYusDt95oE39dDgDIpdA&address=${refinedAddresses[i].city} ${refinedAddresses[i].state} ${refinedAddresses[i].zip}`,
+        type: 'GET',
+        dataType: 'json'
+      }).done(function (geoCode) {
+        addressGeoCode.push(geoCode.results[0].geometry.location);
+      })
+    } else {
+      $.ajax({
+        url: `https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAR6_jdyKWQCb3VYusDt95oE39dDgDIpdA&address=${refinedAddresses[i].address} ${refinedAddresses[i].city} ${refinedAddresses[i].state} ${refinedAddresses[i].zip}`,
+        type: 'GET',
+        dataType: 'json'
+      }).done(function (geoCode) {
+        addressGeoCode.push(geoCode.results[0].geometry.location);
+      })
+    }
+
+  }
+
 }
 
 function renderPets(data) {
   let pets = data.petfinder.pets.pet;
   let renderDivHtml = ``;
   for (let i = 0; i < yieldedAdresses.length; i++) {
-    if (pets[i].media.length >= 1) {
-      renderDivHtml += `
-      <img src=${pets[i].media.photos.photo[2].$t}
-      <ul>
+    renderDivHtml +=
+      `<ul>
       <li>Age: ${pets[i].age.$t}</li>
       <li>Description ${pets[i].description.$t}</li>
       </ul>`
-    } else {
-      renderDivHtml +=
-        `<ul>
-      <li>Age: ${pets[i].age.$t}</li>
-      <li>Description ${pets[i].description.$t}</li>
-      </ul>`
-    }
-
   }
   renderDiv.innerHTML = renderDivHtml;
 }
+
+
 
 $(function () {
 
@@ -133,7 +139,7 @@ $(function () {
         getAddresses(data);
         refineAddresses();
         renderPets(data);
-        //geoCodeAddress();
+        geoCodeAddress();
       })
   }
 
