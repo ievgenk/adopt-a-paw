@@ -1,0 +1,34 @@
+#main-wrapper-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.results {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 25px;
+  text-align: center;
+  line-height: 1.25rem;
+}
+
+.results ul {
+  list-style: none;
+}
+
+#map {
+  height: 500px;
+  width: 50%;
+  margin: 25px;
+}
+button {
+  margin-top: 25px;
+  padding: 15px;
+}
+
+.dog-photo {
+  width: 25%;
+  height: 25%;
+}

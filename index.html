@@ -8,28 +8,120 @@
   <title>Adopt-A-Paw</title>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/awesomplete.css">
 </head>
 
 <body>
-  <h1>Find Pets</h1>
-  <form>
-    <label for="pet-search">Breed Name
-      <input type="text" id="pet-search">
-    </label>
-    <label for="postal">Postal Code
-      <input type="text" id="postal">
-    </label>
-    <!-- <select name="gender" id="gender">
-      <option value="female">Female</option>
-      <option value="male">Male</option>
-    </select> -->
-    <input type="submit" value="Search">
-  </form>
-  <div class="results"></div>
+  <main id="main-wrapper-flex">
+    <h1>Adopt-A-Paw</h1>
+    <form>
+      <label for="pet-search">
+        <input type="text" id="pet-search" placeholder="Breed Name">
+      </label>
+      <label for="postal">
+        <input type="text" id="postal" placeholder="Postal Code">
+      </label>
+      <select name="gender" id="gender">
+        <option value="M">Male</option>
+        <option value="F">Female</option>
+      </select>
+      <select name="age" id="age">
+        <option value="Baby">Pupper</option>
+        <option value="Young">Youngster</option>
+        <option value="Adult">Adult Doggo</option>
+        <option value="Senior">Senior Canine Citizen</option>
+      </select>
+      <input type="submit" value="Search">
+    </form>
+    <div class="lds-css ng-scope">
+      <div style="width:100%;height:100%" class="lds-bars">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <style type="text/css">
+        @keyframes lds-bars {
+          0% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.5;
+          }
+          100% {
+            opacity: 1;
+          }
+        }
+
+        @-webkit-keyframes lds-bars {
+          0% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.5;
+          }
+          100% {
+            opacity: 1;
+          }
+        }
+
+        .lds-bars {
+          position: relative;
+        }
+
+        .lds-bars div {
+          position: absolute;
+          width: 20px;
+          height: 80px;
+          top: 60px;
+          -webkit-animation: lds-bars 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+          animation: lds-bars 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        }
+
+        .lds-bars div:nth-child(1) {
+          left: 30px;
+          background: #1d3f72;
+          -webkit-animation-delay: -0.6s;
+          animation-delay: -0.6s;
+        }
+
+        .lds-bars div:nth-child(2) {
+          left: 70px;
+          background: #5699d2;
+          -webkit-animation-delay: -0.4s;
+          animation-delay: -0.4s;
+        }
+
+        .lds-bars div:nth-child(3) {
+          left: 110px;
+          background: #d8ebf9;
+          -webkit-animation-delay: -0.2s;
+          animation-delay: -0.2s;
+        }
+
+        .lds-bars div:nth-child(4) {
+          left: 150px;
+          background: #71c2cc;
+        }
+
+        .lds-bars {
+          width: 200px !important;
+          height: 200px !important;
+          -webkit-transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+          transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+        }
+      </style>
+    </div>
+    <div class="results"></div>
+    <div id="map"></div>
+    <button id="previous">Previous</button>
+    <button id="next">Next</button>
+    <div id="pageNum"></div>
+  </main>
   <script src="scripts/awesomplete.js"></script>
-  <script src="scripts/petfinder.js">
-  </script>
+  <script src="scripts/petfinder.js"> </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAR6_jdyKWQCb3VYusDt95oE39dDgDIpdA&callback=initMap"></script>
 </body>
 
 </html>
