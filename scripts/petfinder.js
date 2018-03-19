@@ -281,6 +281,7 @@ $(function () {
     $("#pet-search").val("");
     $("#postal").val("");
     trackOffset = "0";
+
     sendPetFinderRequest(breedName, postalCode, dogGender, dogAge);
     getNumberOfQualifiedDogs(breedName, postalCode, dogGender, dogAge);
     pageNum++;
@@ -301,7 +302,7 @@ $(function () {
         offset: trackOffset,
         age: dogAge,
         sex: dogGender,
-        count: 1000
+        count: 500
       },
       type: "GET",
       dataType: "json"
@@ -342,6 +343,7 @@ $(function () {
         geoCodeAddress();
         retreiveBreed(data);
         renderNumberOfPages();
+        $(".loader").hide();
       })
       .fail(
         (renderDiv.innerHTML = `<h1>Did not receive server response.</h1>`)
@@ -399,6 +401,7 @@ $(function () {
           .text(breedInfo);
       }
       $(event.currentTarget).hide();
+      $(".loader").hide();
     });
   });
 
@@ -406,8 +409,5 @@ $(function () {
 
   $(document).ajaxStart(function () {
     $(".loader").show();
-  });
-  $(document).ajaxStop(function () {
-    $(".loader").hide();
   });
 });

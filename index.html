@@ -17,12 +17,13 @@
     <h1>Adopt-A-Paw</h1>
     <form>
       <label for="pet-search">
-        <input type="text" id="pet-search" placeholder="Breed Name">
+        <input type="text" id="pet-search" placeholder="Breed Name (Optional)">
       </label>
       <label for="postal">
-        <input type="text" id="postal" placeholder="Postal Code">
+        <input type="text" id="postal" placeholder="ZIP or City and State" required>
       </label>
       <select name="gender" id="gender">
+        <option value="">M or F</option>
         <option value="M">Male</option>
         <option value="F">Female</option>
       </select>
@@ -113,7 +114,7 @@
         }
       </style>
     </div> -->
-    <div class="loader"></div>
+    <div class="loader hidden"></div>
     <div class="results hidden"></div>
     <div id="map" class="hidden"></div>
     <button id="previous" class="hidden">Previous</button>
