@@ -66,7 +66,7 @@ function refineAddresses() {
 
 function getAllBreeds() {
   $.ajax({
-    url: `http://api.petfinder.com/breed.list?key=831e7bdec6900fcd456fd38ddb8ba34d&animal=dog&format=json&callback=?`,
+    url: `https://api.petfinder.com/breed.list?key=831e7bdec6900fcd456fd38ddb8ba34d&animal=dog&format=json&callback=?`,
     type: `GET`,
     dataType: `json`,
     success: function (response) {
@@ -291,7 +291,7 @@ $(function () {
 
   function getNumberOfQualifiedDogs(breed, postalCode, gender, age) {
     $.ajax({
-      url: `http://api.petfinder.com/pet.find?callback=?&key=831e7bdec6900fcd456fd38ddb8ba34d`,
+      url: `https://api.petfinder.com/pet.find?callback=?&key=831e7bdec6900fcd456fd38ddb8ba34d`,
       data: {
         key: `831e7bdec6900fcd456fd38ddb8ba34d`,
         animal: `dog`,
@@ -315,7 +315,7 @@ $(function () {
 
   function sendPetFinderRequest(breed, postalCode, gender, age) {
     $.ajax({
-        url: `http://api.petfinder.com/pet.find?callback=?&key=831e7bdec6900fcd456fd38ddb8ba34d`,
+        url: `https://api.petfinder.com/pet.find?callback=?&key=831e7bdec6900fcd456fd38ddb8ba34d`,
         data: {
           key: `831e7bdec6900fcd456fd38ddb8ba34d`,
           animal: `dog`,
