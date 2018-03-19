@@ -377,6 +377,9 @@ $(function () {
     $("html").scrollTop(0);
   });
 
+
+  // WIKIPEDIA API REQUEST TO LEARN MORE ABOUT THE BREED
+
   $(".results").on("click", "button", function (event) {
     $.ajax({
       url: `https://en.wikipedia.org/w/api.php?exintro=&explaintext=&callback=?`,
@@ -398,7 +401,7 @@ $(function () {
       console.log(response);
       let breedTag = Object.keys(response.query.pages);
       breedInfo = response.query.pages[breedTag].extract;
-      if (breedInfo == ``) {
+      if (breedInfo == `` || response.query.pages[breedTag].missing == "") {
         $(event.currentTarget)
           .next(`div`)
           .html(
