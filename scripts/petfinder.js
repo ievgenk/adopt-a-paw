@@ -263,6 +263,14 @@ function revealContent() {
   $('.hidden').removeClass('hidden');
 }
 
+function preventNextClick() {
+  if (parseInt(trackOffset) / 5 +
+    1 == Math.floor(totalNumberOfQualifiedDogs / 5)) {
+    console.log(`disabled`)
+    nextButton.setAttribute('disabled', true);
+  }
+}
+
 //JQUERY WRAPPER
 
 $(function () {
@@ -344,6 +352,7 @@ $(function () {
         retreiveBreed(data);
         renderNumberOfPages();
         $(".loader").hide();
+        preventNextClick();
       })
       .fail(
         (renderDiv.innerHTML = `<h1>Did not receive server response.</h1>`)
