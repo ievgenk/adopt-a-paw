@@ -124,7 +124,8 @@ function renderPets(data) {
           pets[i].media.photos.photo[2].$t
         }" alt="Dog Photo" class='dog-photo'>`;
       }
-      renderDivHtml += `<ul class="dog-result">`;
+      renderDivHtml += `<div class="dog-result white-background rounded-corners">`;
+      renderDivHtml += `<ul class="">`;
       // Start of the list
       if (Object.keys(data.petfinder.pets.pet[i].name).length == 0) {
         renderDivHtml += `<li>Name is not availiable</li>`;
@@ -197,6 +198,7 @@ function renderPets(data) {
       renderDivHtml += `</ul>`;
       renderDivHtml += `<button class="wiki-button">Learn More About Breed</button>`;
       renderDivHtml += `<div class="wiki-result"></div>`;
+      renderDivHtml += `</div>`;
     } catch (error) {
       console.log(error);
       renderDivHtml += `<h2>There was an error rendering these dogs</h2>`;
@@ -264,12 +266,13 @@ function revealContent() {
 }
 
 function preventNextClick() {
-  if (parseInt(trackOffset) / 5 +
-    1 == Math.floor(totalNumberOfQualifiedDogs / 5)) {
-    console.log(`disabled`)
-    nextButton.setAttribute('disabled', true);
+  if (parseInt(trackOffset) / 5 + 1 == Math.floor(totalNumberOfQualifiedDogs / 5)) {
+    nextButton.disabled = true;
+  } else {
+    nextButton.disabled = false;
   }
 }
+
 
 //JQUERY WRAPPER
 
@@ -289,7 +292,7 @@ $(function () {
     $("#pet-search").val("");
     $("#postal").val("");
     trackOffset = "0";
-
+    //$('main').addClass('white-background rounded-corners');
     sendPetFinderRequest(breedName, postalCode, dogGender, dogAge);
     getNumberOfQualifiedDogs(breedName, postalCode, dogGender, dogAge);
     pageNum++;
@@ -393,8 +396,8 @@ $(function () {
         action: `query`,
         prop: `extracts`,
         titles: `${$(this)
-          .prev("ul.dog-result")
-          .children("li:nth-child(2)")
+          .prev("ul")
+          .children("li:nth-of-type(2)")
           .attr("class")}`
       }
     }).done(function (response) {
@@ -410,11 +413,12 @@ $(function () {
       } else {
         $(event.currentTarget)
           .next(`div`)
-          .text(breedInfo);
+          .html(`<p class="white-background rounded-corners">${breedInfo}</p>`);
       }
       $(event.currentTarget).hide();
       $(".loader").hide();
     });
+    console.log($(this).prev('ul').children('li:nth-of-type(2)').attr("class"))
   });
 
   // SPINNER FOR LOADING
