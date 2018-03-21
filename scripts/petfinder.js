@@ -280,6 +280,11 @@ function preventNextClick() {
   }
 }
 
+String.prototype.capitalize = function () {
+  return this.replace(/(?:^|\s)\S/g, function (a) {
+    return a.toUpperCase();
+  });
+};
 
 
 //JQUERY WRAPPER
@@ -293,7 +298,9 @@ $(function () {
 
   $("form").on("submit", function (event) {
     breedName = $("#pet-search").val();
+    breedName = breedName.capitalize();
     postalCode = $("#postal").val();
+    postalCode = postalCode.toUpperCase();
     dogAge = $("#age").val();
     dogGender = $("#gender").val();
     event.preventDefault();
@@ -351,25 +358,38 @@ $(function () {
       })
       .done(function (data) {
         console.log(data);
-        searchedDogsBreeds = [];
-        yieldedAdresses = [];
-        refinedAddresses = [];
-        addressGeoCode = [];
-        getAddresses(data);
-        refineAddresses();
-        renderPets(data);
-        geoCodeAddress();
-        retreiveBreed(data);
-        renderNumberOfPages();
-        $(".loader").hide();
-        preventNextClick();
-        $('html, body').animate({
-          scrollTop: $('#results').offset().top
-        }, 500)
+        if (data.petfinder.header.status.code.$t == "100") {
+          searchedDogsBreeds = [];
+          yieldedAdresses = [];
+          refinedAddresses = [];
+          addressGeoCode = [];
+          getAddresses(data);
+          refineAddresses();
+          renderPets(data);
+          geoCodeAddress();
+          retreiveBreed(data);
+          renderNumberOfPages();
+          $('#map').show();
+          $('#nav-buttons').show();
+          $(".loader").hide();
+          preventNextClick();
+          $('html, body').animate({
+            scrollTop: $('#results').offset().top
+          }, 500);
+        } else {
+          searchedDogsBreeds = [];
+          yieldedAdresses = [];
+          refinedAddresses = [];
+          addressGeoCode = [];
+          $('#map').hide();
+          $('#nav-buttons').hide();
+          $(".loader").hide();
+          renderDiv.innerHTML = `<h1 class='server-response'>No Results Found</h1>`
+        }
       })
-      .fail(
-        (renderDiv.innerHTML = `<h1 class='server-response'>Loading</br> Waiting on server response</h1>`)
-      );
+      .fail(function (xhr, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown)
+      });
   }
 
   //EVENT HANDLERS
