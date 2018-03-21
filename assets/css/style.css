@@ -106,6 +106,20 @@ body {
   word-wrap: break-word;
 }
 
+#question {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  font-size: 4rem;
+  position: absolute;
+  top: -2rem;
+  right: 1rem;
+}
+
+.fa-question {
+  color: #f9a828;
+}
+
 /* FORM STYLING  */
 
 form {

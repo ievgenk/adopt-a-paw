@@ -370,7 +370,7 @@ $(function () {
       })
       .done(function (data) {
         console.log(data);
-        if (data.petfinder.header.status.code.$t == "100") {
+        if (data.petfinder.header.status.code.$t == "100" && Object.keys(data.petfinder.pets).length != 0) {
           dogNames = [];
           searchedDogsBreeds = [];
           yieldedAdresses = [];
@@ -389,6 +389,7 @@ $(function () {
           $('html, body').animate({
             scrollTop: $('#results').offset().top
           }, 500);
+
         } else {
           dogNames = [];
           searchedDogsBreeds = [];
