@@ -69,7 +69,7 @@ function getAllBreeds() {
     url: `https://api.petfinder.com/breed.list?key=831e7bdec6900fcd456fd38ddb8ba34d&animal=dog&format=json&callback=?`,
     type: `GET`,
     dataType: `json`,
-    success: function(response) {
+    success: function (response) {
       response.petfinder.breeds.breed.map(dogs => allBreedsArray.push(dogs.$t));
       return allBreedsArray;
     }
@@ -280,23 +280,24 @@ function preventNextClick() {
   }
 }
 
+
+
 //JQUERY WRAPPER
 
-$(function() {
+$(function () {
   //Getting all of the dog breeds
 
   getAllBreeds();
 
   //Submit Initial Request to fetch Dogs according to the search inputs
 
-  $("form").on("submit", function(event) {
+  $("form").on("submit", function (event) {
     breedName = $("#pet-search").val();
     postalCode = $("#postal").val();
     dogAge = $("#age").val();
     dogGender = $("#gender").val();
     event.preventDefault();
     $("#pet-search").val("");
-    $("#postal").val("");
     trackOffset = "0";
     //$('main').addClass('white-background rounded-corners');
     sendPetFinderRequest(breedName, postalCode, dogGender, dogAge);
@@ -323,7 +324,7 @@ $(function() {
       },
       type: "GET",
       dataType: "json"
-    }).done(function(data) {
+    }).done(function (data) {
       totalNumberOfQualifiedDogs = data.petfinder.pets.pet.length;
       renderNumberOfPages();
     });
@@ -333,22 +334,22 @@ $(function() {
 
   function sendPetFinderRequest(breed, postalCode, gender, age) {
     $.ajax({
-      url: `https://api.petfinder.com/pet.find?callback=?&key=831e7bdec6900fcd456fd38ddb8ba34d`,
-      data: {
-        key: `831e7bdec6900fcd456fd38ddb8ba34d`,
-        animal: `dog`,
-        breed: breed,
-        location: postalCode,
-        format: `json`,
-        offset: trackOffset,
-        count: 5,
-        age: dogAge,
-        sex: dogGender
-      },
-      type: "GET",
-      dataType: "json"
-    })
-      .done(function(data) {
+        url: `https://api.petfinder.com/pet.find?callback=?&key=831e7bdec6900fcd456fd38ddb8ba34d`,
+        data: {
+          key: `831e7bdec6900fcd456fd38ddb8ba34d`,
+          animal: `dog`,
+          breed: breed,
+          location: postalCode,
+          format: `json`,
+          offset: trackOffset,
+          count: 5,
+          age: dogAge,
+          sex: dogGender
+        },
+        type: "GET",
+        dataType: "json"
+      })
+      .done(function (data) {
         console.log(data);
         searchedDogsBreeds = [];
         yieldedAdresses = [];
@@ -362,6 +363,9 @@ $(function() {
         renderNumberOfPages();
         $(".loader").hide();
         preventNextClick();
+        $('html, body').animate({
+          scrollTop: $('#results').offset().top
+        }, 500)
       })
       .fail(
         (renderDiv.innerHTML = `<h1 class='server-response'>Loading</br> Waiting on server response</h1>`)
@@ -370,7 +374,7 @@ $(function() {
 
   //EVENT HANDLERS
 
-  previousButton.addEventListener("click", function(event) {
+  previousButton.addEventListener("click", function (event) {
     event.stopPropagation();
     if (parseInt(trackOffset) >= 5) {
       trackOffset = String(parseInt(trackOffset) - 5);
@@ -379,7 +383,7 @@ $(function() {
     $("html").scrollTop(0);
   });
 
-  nextButton.addEventListener("click", function(event) {
+  nextButton.addEventListener("click", function (event) {
     event.stopPropagation();
     trackOffset = String(parseInt(trackOffset) + 5);
     sendPetFinderRequest(breedName, postalCode, dogGender, dogAge);
@@ -388,7 +392,7 @@ $(function() {
 
   // WIKIPEDIA API REQUEST TO LEARN MORE ABOUT THE BREED
 
-  $(".results").on("click", "button", function(event) {
+  $(".results").on("click", "button", function (event) {
     $.ajax({
       url: `https://en.wikipedia.org/w/api.php?exintro=&explaintext=&callback=?`,
       type: `GET`,
@@ -405,7 +409,7 @@ $(function() {
           .children("li:nth-of-type(1)")
           .attr("class")}`
       }
-    }).done(function(response) {
+    }).done(function (response) {
       console.log(response);
       let breedTag = Object.keys(response.query.pages);
       breedInfo = response.query.pages[breedTag].extract;
@@ -425,15 +429,15 @@ $(function() {
     });
     console.log(
       $(this)
-        .prev("ul")
-        .children("li:nth-of-type(1)")
-        .attr("class")
+      .prev("ul")
+      .children("li:nth-of-type(1)")
+      .attr("class")
     );
   });
 
   // SPINNER FOR LOADING
 
-  $(document).ajaxStart(function() {
+  $(document).ajaxStart(function () {
     $(".loader").show();
   });
 });
