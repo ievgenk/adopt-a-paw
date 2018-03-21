@@ -4,68 +4,76 @@ html {
   height: 100%;
   margin: 0;
   padding: 0;
+  font-size: 10px;
+}
+
+a {
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+
+h1 {
+  font-size: 3rem;
+  color: #f9a828;
+  font-family: "Permanent Marker", cursive;
+}
+ul {
+  padding: 0;
+}
+li {
+  word-wrap: break-word;
 }
 
 body {
+  font-size: 2rem;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
   width: 100%;
-  height: 100%;
-  background: linear-gradient(0deg, rgba(132, 87, 124, 0.76), rgba(132, 87, 124, 0.76)), url(../img/dog2.png);
+  background: linear-gradient(0deg, #07617da6, #07617da6), url(../img/dog2.png);
   background-repeat: repeat;
   background-position: center;
   background-size: cover;
 }
 
-/* FORM STYLING  */
-
-input,
-select,
-option {
-  width: 20vw;
-  border: none;
-  border-bottom: 2px darkgrey solid;
-}
-
-/* BUTTONS */
-
-button {
-  outline: none;
-  border: none;
-  background-color: #333644;
-  color: white;
-  border-radius: 5px;
-}
-
-input[type=submit] {
-  outline: none;
-  margin-top: 5px;
-  border: none;
-}
-
-button:disabled {
-  background-color: rgb(98, 100, 102);
-  color: lightgray;
-}
-
-/* FLEX CLASSES */
-
-.flex-container-column {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+#main-wrapper-flex {
+  flex-basis: 80vw;
+  margin: 2vw 10vw;
   align-items: center;
 }
-
 .rounded-corners {
   border-radius: 5px;
 }
 
 .white-background {
-  background-color: rgba(255, 255, 255, 0.801);
+  background-color: #ececeb;
 }
+.hidden {
+  display: none;
+}
+/* TEXT AND MESSAGES */
 
-#main-wrapper-flex {
-  flex-basis: 80vw;
-  margin: 2vw 10vw;
+.server-response {
+  color: #f9a828;
+  background-color: #2e383fbd;
+  padding: 40px;
+  border-radius: 5px;
+  line-height: 1.5;
+}
+#pageNum {
+  color: #ececeb;
+  background-color: #2e383fbd;
+  padding: 1rem;
+  border-radius: 5px;
+}
+/* RESULTS RENDERING */
+
+.dog-result {
+  font-size: 1.7rem;
+  line-height: 1.4;
+  width: 80vw;
+  padding: 0.5rem 2.5rem;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
 
 .results {
@@ -78,36 +86,137 @@ button:disabled {
   list-style: none;
 }
 
-#map {
-  height: 500px;
-  width: 50%;
-  margin: 25px;
+.wiki-results {
+  margin-bottom: 25px;
+}
+.dog-name {
+  margin: 0;
+  padding-top: 1.5rem;
+  background-color: white;
+  font-family: "Permanent Marker", cursive;
+  color: #2e383f;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+/* FORM STYLING  */
+
+form {
+  background-color: #2e383fd8;
+  padding: 8rem;
+  border-radius: 15px;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
 
+input[type="submit"] {
+  outline: none;
+  margin-top: 4rem;
+  border: none;
+  background-color: #f9a828;
+  color: #2e383f;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+input[type="submit"]:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+}
+input::placeholder {
+  color: #f9a828;
+}
+input,
+select,
+option {
+  margin: 0.7rem 0;
+  height: 6vh;
+  width: 30vw;
+  border: none;
+  background-color: #ececeb23;
+  color: #f9a828;
+}
+option {
+  background-color: #2e383f;
+}
+input:focus,
+select:focus,
+option:focus {
+  outline: 0;
+}
+/* IMAGES */
+
+.dog-no-photo {
+  background: #ececeb;
+  width: 60vw;
+  height: 40vh;
+  padding: 15px;
+}
+.dog-photo {
+  width: 60vw;
+  height: 40vh;
+}
+.dog-frame {
+  margin: 1.5rem 0;
+  border: 15px solid white;
+  border-bottom: 25px solid white;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+/* BUTTONS */
+
+button {
+  outline: none;
+  border: none;
+  background-color: #333644;
+  color: white;
+  border-radius: 5px;
+}
+
+button:disabled {
+  background-color: rgb(98, 100, 102);
+  color: lightgray;
+}
 button {
   margin-top: 25px;
   padding: 15px;
 }
-
-.dog-photo {
-  width: 25%;
-  height: 25%;
-}
-
 .wiki-button {
   margin: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: background-color 0.4s, color 0.4s;
+}
+.wiki-button:hover {
+  background-color: #f9a828;
+  color: #333644;
+  cursor: pointer;
+}
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.prev-next {
+  max-width: 30vw;
+}
+/* FLEX CLASSES */
+
+.flex-container-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.wiki-results {
-  margin-bottom: 25px;
+/* GOOGLE MAPS STYLING */
+
+#map {
+  height: 70vh;
+  width: 80vw;
+  margin: 25px;
 }
 
-.hidden {
-  display: none;
-}
+/* SPINNER */
 
 .loader {
-  color: #2648b9;
+  color: #f9a828;
   font-size: 90px;
   text-indent: -9999em;
   overflow: hidden;
@@ -125,47 +234,65 @@ button {
 
 @-webkit-keyframes load6 {
   0% {
-    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
   }
   5%,
   95% {
-    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
   }
   10%,
   59% {
-    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em,
+      -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em,
+      -0.297em -0.775em 0 -0.477em;
   }
   20% {
-    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em,
+      -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em,
+      -0.749em -0.34em 0 -0.477em;
   }
   38% {
-    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em,
+      -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em,
+      -0.82em -0.09em 0 -0.477em;
   }
   100% {
-    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
   }
 }
 
 @keyframes load6 {
   0% {
-    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
   }
   5%,
   95% {
-    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
   }
   10%,
   59% {
-    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em,
+      -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em,
+      -0.297em -0.775em 0 -0.477em;
   }
   20% {
-    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em,
+      -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em,
+      -0.749em -0.34em 0 -0.477em;
   }
   38% {
-    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em,
+      -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em,
+      -0.82em -0.09em 0 -0.477em;
   }
   100% {
-    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
   }
 }
 
@@ -188,5 +315,120 @@ button {
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
+  }
+}
+
+/* MEDIA QUERIES  */
+/* HORIZONTAL ORIENTATION */
+@media only screen and (min-width: 600px) and (max-width: 949px) and (orientation: landscape) {
+  h1 {
+    font-size: 4rem;
+  }
+  .dog-photo {
+    width: 60vw;
+    height: 80vh;
+  }
+  .dog-result {
+    font-size: 2rem;
+    padding: 1.2rem;
+  }
+  .one-dog-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/* REGULAR */
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  .one-dog-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  form {
+    padding: 3rem;
+  }
+  input,
+  select,
+  option {
+    width: 60vw;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1250px) {
+  h1 {
+    font-size: 5rem;
+  }
+  input,
+  select,
+  option {
+    width: 50vw;
+  }
+  .dog-frame {
+    margin: 3rem 0;
+    border: 25px solid white;
+    border-bottom: 45px solid white;
+  }
+  .dog-name {
+    padding-top: 4rem;
+  }
+  .dog-result {
+    font-size: 2.4rem;
+    padding: 2rem;
+  }
+  .one-dog-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media only screen and (min-width: 1250px) {
+  h1 {
+    font-size: 7rem;
+  }
+
+  .one-dog-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 5rem 0;
+    align-items: flex-start;
+  }
+
+  .dog-frame {
+    margin: 0;
+  }
+  .results {
+    width: 100%;
+  }
+  .dog-photo {
+    width: 20vw;
+    max-height: 40vh;
+  }
+  .dog-no-photo {
+    width: 20vw;
+    max-height: 40vh;
+  }
+
+  .dog-result {
+    width: 55vw;
+    max-height: auto;
+    font-size: 2.5rem;
+  }
+  .prev-next {
+    font-size: 3rem;
+  }
+  #pageNum {
+    font-size: 3rem;
+  }
+  #map {
+    height: 60vh;
+    width: 80vw;
+    margin: 25px;
   }
 }

@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Adopt-A-Paw</title>
-
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/5.0.0/sanitize.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
@@ -15,33 +16,38 @@
 
 <body>
   <main id="main-wrapper-flex" class="flex-container-column">
-    <h1>Adopt-A-Paw 🐶</h1>
+    <a href="index.html">
+      <h1>Adopt-A-Paw 🐶</h1>
+    </a>
     <form class="flex-container-column">
       <label for="pet-search">
-        <input type="text" id="pet-search" placeholder="Breed Name (Optional)" class="white-background">
+        <input type="text" id="pet-search" placeholder="Breed Name (Optional)" class="">
       </label>
       <label for="postal">
-        <input type="text" id="postal" placeholder="ZIP or City and State" class="white-background" required>
+        <input type="text" id="postal" placeholder="ZIP or City and State" class="" required>
       </label>
-      <select name="gender" id="gender" class="white-background">
+      <select name="gender" id="gender" class="">
         <option value="">M or F</option>
         <option value="M">Male</option>
         <option value="F">Female</option>
       </select>
-      <select name="age" id="age" class="white-background">
+      <select name="age" id="age" class="">
         <option value="Baby">Pupper</option>
         <option value="Young">Youngster</option>
         <option value="Adult">Adult Doggo</option>
         <option value="Senior">Senior Canine Citizen</option>
       </select>
-      <input type="submit" value="Search" class="white-background">
+      <input type="submit" value="Search" class="">
     </form>
     <div class="loader hidden"></div>
     <div class="results hidden flex-container-column"></div>
     <div id="map" class="hidden"></div>
-    <button id="previous" class="hidden">Previous</button>
-    <button id="next" class="hidden">Next</button>
-    <div id="pageNum" class="hidden"></div>
+    <div class="nav-buttons">
+      <button id="previous" class="hidden prev-next">Previous</button>
+      <div id="pageNum" class="hidden"></div>
+      <button id="next" class="hidden prev-next">Next</button>
+    </div>
+
   </main>
   <script src="scripts/awesomplete.js"></script>
   <script src="scripts/petfinder.js">
