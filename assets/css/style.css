@@ -175,14 +175,14 @@ option:focus {
 
 .dog-no-photo {
   background: #ececeb;
-  width: 60vw;
-  height: 40vh;
+  max-width: 60vw;
+  height: auto;
   padding: 15px;
 }
 
 .dog-photo {
-  width: 60vw;
-  height: 40vh;
+  max-width: 60vw;
+  height: auto;
 }
 
 .dog-frame {
@@ -233,6 +233,14 @@ button {
 
 .prev-next {
   max-width: 30vw;
+}
+
+#previous {
+  cursor: pointer;
+}
+
+#next {
+  cursor: pointer;
 }
 
 /* FLEX CLASSES */
@@ -347,8 +355,8 @@ button {
     font-size: 4rem;
   }
   .dog-photo {
-    width: 60vw;
-    height: 80vh;
+    max-width: 60vw;
+    height: auto;
   }
   .dog-result {
     font-size: 2rem;
@@ -423,17 +431,19 @@ button {
   }
   .dog-frame {
     margin: 0;
+    position: sticky;
+    top: 1.5rem;
   }
   .results {
     width: 100%;
   }
   .dog-photo {
     width: 20vw;
-    max-height: 40vh;
+    max-height: auto;
   }
   .dog-no-photo {
     width: 20vw;
-    max-height: 40vh;
+    max-height: auto;
   }
   .dog-result {
     width: 55vw;

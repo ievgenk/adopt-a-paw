@@ -292,6 +292,14 @@ function preventNextClick() {
   }
 }
 
+function preventPrevClick() {
+  if (parseInt(trackOffset) / 5 + 1 == 1) {
+    previousButton.disabled = true;
+  } else {
+    previousButton.disabled = false;
+  }
+}
+
 String.prototype.capitalize = function () {
   return this.replace(/(?:^|\s)\S/g, function (a) {
     return a.toUpperCase();
@@ -309,13 +317,13 @@ $(function () {
   //Submit Initial Request to fetch Dogs according to the search inputs
 
   $("form").on("submit", function (event) {
+    event.preventDefault();
     breedName = $("#pet-search").val();
     breedName = breedName.capitalize();
     postalCode = $("#postal").val();
     postalCode = postalCode.toUpperCase();
     dogAge = $("#age").val();
     dogGender = $("#gender").val();
-    event.preventDefault();
     $("#pet-search").val("");
     trackOffset = "0";
     //$('main').addClass('white-background rounded-corners');
@@ -385,6 +393,7 @@ $(function () {
           $('#map').show();
           $('#nav-buttons').show();
           $(".loader").hide();
+          preventPrevClick();
           preventNextClick();
           $('html, body').animate({
             scrollTop: $('#results').offset().top
