@@ -19,6 +19,7 @@ let breedName = ``;
 let postalCode = ``;
 let totalNumberOfQualifiedDogs = ``;
 let searchedDogsBreeds = [];
+let dogNames = [];
 //Breed Suggestions
 let allBreedsArray = [];
 new Awesomplete(breedInput, {
@@ -129,6 +130,7 @@ function renderPets(data) {
       if (Object.keys(data.petfinder.pets.pet[i].name).length == 0) {
         renderDivHtml += `<h3 class='dog-name'>Name is not availiable</h3>`;
       } else {
+        dogNames.push(pets[i].name.$t);
         renderDivHtml += `
           <h3 class='dog-name'>${pets[i].name.$t}</h3>`;
       }
@@ -231,23 +233,33 @@ function tryShowMap() {
 
 function showMap() {
   let location;
-
+  let contentString;
   let options = {
-    zoom: 5,
+    zoom: 9,
     center: addressGeoCode[0]
   };
   let map = new google.maps.Map(document.getElementById("map"), options);
 
-  function addMarker(coords) {
+
+
+  function addMarkerWithInfo(coords, boxString) {
     let marker = new google.maps.Marker({
       position: coords,
       map: map
     });
+    let infowindow = new google.maps.InfoWindow({
+      content: boxString
+    });
+    marker.addListener('click', function () {
+      infowindow.open(map, marker);
+    });
   }
   for (let i = 0; i < 5; i++) {
+    contentString = `<h3>${dogNames[i]}</h3>`;
     location = addressGeoCode[i];
-    addMarker(location);
+    addMarkerWithInfo(location, contentString);
   }
+
 }
 
 function renderNumberOfPages() {
@@ -359,6 +371,7 @@ $(function () {
       .done(function (data) {
         console.log(data);
         if (data.petfinder.header.status.code.$t == "100") {
+          dogNames = [];
           searchedDogsBreeds = [];
           yieldedAdresses = [];
           refinedAddresses = [];
@@ -377,6 +390,7 @@ $(function () {
             scrollTop: $('#results').offset().top
           }, 500);
         } else {
+          dogNames = [];
           searchedDogsBreeds = [];
           yieldedAdresses = [];
           refinedAddresses = [];
