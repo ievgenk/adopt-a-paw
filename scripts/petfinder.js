@@ -310,6 +310,17 @@ String.prototype.capitalize = function () {
 //JQUERY WRAPPER
 
 $(function () {
+  //Event listener for questions button
+
+  $('#cancel-button').on('click', function (event) {
+    $('.questions').hide();
+  })
+
+
+  $('#question').on('click', function (event) {
+    $('.questions').show();
+  })
+
   //Getting all of the dog breeds
 
   getAllBreeds();
