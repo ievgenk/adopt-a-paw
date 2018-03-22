@@ -1,10 +1,14 @@
 /* GENERAL STYLING */
 
 html {
-  height: 100%;
-  margin: 0;
-  padding: 0;
   font-size: 10px;
+}
+
+html,
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 a {
@@ -39,7 +43,7 @@ body {
 
 #main-wrapper-flex {
   flex-basis: 80vw;
-  margin: 2vw 10vw;
+  margin: 0 10vw;
   align-items: center;
 }
 
@@ -226,6 +230,9 @@ input[type="submit"] {
   color: #2e383f;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-radius: 1000vh;
+  font-family: "Permanent Marker", cursive;
+  font-size: 3rem;
 }
 
 input[type="submit"]:hover {
