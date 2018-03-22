@@ -313,12 +313,14 @@ $(function () {
   //Event listener for questions button
 
   $('#cancel-button').on('click', function (event) {
-    $('.questions').hide();
+    event.stopPropagation()
+    $('.questions').toggleClass(`very-hidden`);
   })
 
 
   $('#question').on('click', function (event) {
-    $('.questions').show();
+    event.stopPropagation()
+    $('.questions').toggleClass(`very-hidden`);
   })
 
   //Getting all of the dog breeds
