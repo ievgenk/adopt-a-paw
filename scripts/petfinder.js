@@ -142,12 +142,12 @@ function renderPets(data) {
         renderDivHtml += `<li>Lovely Mutt</li>`;
       } else if (Array.isArray(data.petfinder.pets.pet[i].breeds.breed)) {
         renderDivHtml += `
-        <li class="${pets[i].breeds.breed[0].$t}">Primary Breed: ${
+        <li class="${pets[i].breeds.breed[0].$t}"><span class="breed">Primary Breed:</span> ${
           pets[i].breeds.breed[0].$t
         }</li>`;
       } else if (typeof data.petfinder.pets.pet[i].breeds.breed == `object`) {
         renderDivHtml += `
-          <li class="${pets[i].breeds.breed.$t}">Primary Breed: ${
+          <li class="${pets[i].breeds.breed.$t}"><span class="breed">Primary Breed:</span> ${
           pets[i].breeds.breed.$t
         }</li>`;
       }
@@ -155,49 +155,52 @@ function renderPets(data) {
         renderDivHtml += `<li>Gender not confirmed</li>`;
       } else {
         renderDivHtml += `
-          <li>Gender: ${pets[i].sex.$t}</li>`;
+          <li><span class="gender">Gender:</span> ${pets[i].sex.$t}</li>`;
       }
       if (Object.keys(data.petfinder.pets.pet[i].age).length == 0) {
-        renderDivHtml += `<li>Pets age is not availiable</li>`;
+        renderDivHtml += `<li><span class="age">Pets age is not availiable</span></li>`;
       } else {
-        renderDivHtml += `<li>Age: ${pets[i].age.$t}</li>`;
+        renderDivHtml += `<li><span class="age">Age:</span> ${pets[i].age.$t}</li>`;
       }
-
+      renderDivHtml += `<li><hr></li>`;
+      renderDivHtml += `<li class="about">About</li>`
       if (Object.keys(data.petfinder.pets.pet[i].description).length == 0) {
         renderDivHtml += `<li>Description is not availiable</li>`;
       } else {
         renderDivHtml += `
           <li>${pets[i].description.$t}</li>`;
       }
+      renderDivHtml += `<hr>`
       if (refinedAddresses[i].address == null) {
         renderDivHtml += ` `;
       } else {
-        renderDivHtml += `<li>Address: ${refinedAddresses[i].address} `;
+        renderDivHtml += `<li><span class="address">Address:</span> ${refinedAddresses[i].address} `;
       }
       if (refinedAddresses[i].city == null) {
         renderDivHtml += ` `;
       } else {
-        renderDivHtml += `City: ${refinedAddresses[i].city} `;
+        renderDivHtml += `<span class="address">City:</span> ${refinedAddresses[i].city} `;
       }
       if (refinedAddresses[i].state == null) {
         renderDivHtml += ` `;
       } else {
-        renderDivHtml += `State: ${refinedAddresses[i].state} `;
+        renderDivHtml += `<span class="address">State:</span> ${refinedAddresses[i].state} `;
       }
+      renderDivHtml += `<br>`;
       if (refinedAddresses[i].zip == null) {
         renderDivHtml += ` `;
       } else {
-        renderDivHtml += `Postal Code: ${refinedAddresses[i].zip} `;
+        renderDivHtml += `<span class="address">Postal Code:</span> ${refinedAddresses[i].zip} `;
       }
       if (refinedAddresses[i].email == null) {
         renderDivHtml += ` `;
       } else {
-        `Email: ${refinedAddresses[i].email} `;
+        `<span class="address">Email:</span> ${refinedAddresses[i].email} `;
       }
       if (refinedAddresses[i].phone == null) {
         renderDivHtml += ` `;
       } else {
-        renderDivHtml += `Phone: ${refinedAddresses[i].phone} `;
+        renderDivHtml += `<span class="address">Phone:</span> ${refinedAddresses[i].phone} `;
       }
       renderDivHtml += `</li>`;
       renderDivHtml += `</ul>`;
@@ -479,7 +482,7 @@ $(function () {
       } else {
         $(event.currentTarget)
           .next(`div`)
-          .html(`<p class="white-background rounded-corners">${breedInfo}</p>`);
+          .html(`<hr><p class="breed">Additional Breed Info<p><p class="white-background rounded-corners">${breedInfo}</p>`);
       }
       $(event.currentTarget).hide();
       $(".loader").hide();

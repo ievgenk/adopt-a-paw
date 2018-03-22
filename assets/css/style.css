@@ -110,6 +110,31 @@ body {
   word-wrap: break-word;
 }
 
+.breed,
+.gender,
+.age,
+.address,
+.about {
+  color: #333644;
+  font-weight: bold;
+  font-family: "Permanent Marker", cursive;
+  font-size: 3rem;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.about {
+  margin: 1rem 0;
+}
+
+span.age {
+  display: inline-block;
+}
+
+li span.age {
+  margin-bottom: 1rem;
+}
+
 /* FAQ SECTION */
 
 #question {
@@ -148,6 +173,7 @@ body {
   top: 0;
   left: 0;
   color: #f9a828;
+  z-index: 1000;
 }
 
 .listed-questions {
@@ -457,8 +483,23 @@ button {
     font-size: 2rem;
   }
   #question {
-    width: 5rem;
-    height: 5rem;
+    width: 4rem;
+    height: 4rem;
+    font-size: 2rem;
+  }
+  .fa-question {
+    position: relative;
+    bottom: 0.5rem;
+    right: 0.3rem
+  }
+  .breed,
+  .gender,
+  .age,
+  .address,
+  .about {
+    font-size: 2rem;
+  }
+  h1 {
     font-size: 2.5rem;
   }
 }
@@ -528,7 +569,7 @@ button {
     font-size: 3rem;
   }
   #pageNum {
-    font-size: 3rem;
+    font-size: 2rem;
   }
   #map {
     height: 60vh;
