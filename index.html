@@ -19,29 +19,29 @@
 
 <body>
 
-  <main id="main-wrapper-flex" class="flex-container-column">
+  <main id="main-wrapper-flex" class="flex-container-column" role="main" aria-live="assertive">
     <a href="index.html">
       <h1>Adopt-A-Paw 🐶</h1>
     </a>
-    <form class="flex-container-column">
+    <form class="flex-container-column" role="form">
       <label for="pet-search">
-        <input type="text" id="pet-search" placeholder="Breed Name (Optional)" class="">
+        <input type="text" id="pet-search" placeholder="Breed Name (Optional)" class="" aria-label="dog search input">
       </label>
       <label for="postal">
-        <input type="text" id="postal" placeholder="ZIP or City and State" class="" required>
+        <input type="text" id="postal" placeholder="ZIP or City and State" class="" required aria-label="postal code input">
       </label>
-      <select name="gender" id="gender" class="">
+      <select name="gender" id="gender" class="" aria-label="gender selection">
         <option value="">M or F</option>
         <option value="M">Male</option>
         <option value="F">Female</option>
       </select>
-      <select name="age" id="age" class="">
-        <option value="Baby">Pupper</option>
-        <option value="Young">Youngster</option>
-        <option value="Adult">Adult Doggo</option>
-        <option value="Senior">Senior Canine Citizen</option>
+      <select name="age" id="age" class="" aria-label="age selection">
+        <option value="Baby" role="option">Pupper</option>
+        <option value="Young" role="option">Youngster</option>
+        <option value="Adult" role="option">Adult Doggo</option>
+        <option value="Senior" role="option">Senior Canine Citizen</option>
       </select>
-      <input type="submit" value="Search" class="">
+      <input type="submit" value="Search" class="" aria-label="Search Button">
     </form>
     <button id="question">
       <i class="fas fa-question"></i>
