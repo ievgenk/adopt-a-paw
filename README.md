@@ -4,10 +4,10 @@ Simple application that helps users to find dogs that can be adopted at their lo
 
 [**Live-Demo**](<http://ievgenk.github.io/adopt-a-paw>)
 
-## Short-Demo
+## Animated-Showcase
 ![Animated gif demo of the app](./adopt-a-paw.gif)
 
-## Technologies Used
+##  Technologies Used
 
 - HTML
 - CSS
